@@ -11,7 +11,6 @@ import SDWebImage
 class ViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var searchTextField: UITextField!
-    @IBOutlet weak var oneGifImageView: UIImageView!
 
     var giphyKey: String? = nil
 
@@ -80,7 +79,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     let gifURL = original["url"] as? String {
                     print("GIF URL: \(gifURL)")
                     let gifURL2 = URL(string: gifURL)
-                    oneGifImageView.sd_setImage(with: gifURL2, placeholderImage: UIImage(named: "logo.png"))
+                    // oneGifImageView.sd_setImage(with: gifURL2, placeholderImage: UIImage(named: "logo.png"))
                 } else {
                     print("No GIF URL found")
                 }

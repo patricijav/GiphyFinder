@@ -63,3 +63,6 @@ fastlane/test_output
 
 # Ignoring macOS generated files
 **/.DS_Store
+
+# Ignoring Giphy API key
+GiphyFinder/Secrets.plist

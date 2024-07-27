@@ -13,6 +13,7 @@
 		053EC1D82C5461420019C618 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 053EC1D72C5461420019C618 /* Base */; };
 		053EC1DA2C5461430019C618 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 053EC1D92C5461430019C618 /* Assets.xcassets */; };
 		053EC1DD2C5461430019C618 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 053EC1DC2C5461430019C618 /* Base */; };
+		0592EE5E2C54F3840082D8DD /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0592EE5D2C54F3840082D8DD /* Secrets.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		053EC1D92C5461430019C618 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		053EC1DC2C5461430019C618 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		053EC1DE2C5461430019C618 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0592EE5D2C54F3840082D8DD /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				0592EE5A2C54D1180082D8DD /* Controller */,
 				053EC1D92C5461430019C618 /* Assets.xcassets */,
 				053EC1DE2C5461430019C618 /* Info.plist */,
+				0592EE5D2C54F3840082D8DD /* Secrets.plist */,
 			);
 			path = GiphyFinder;
 			sourceTree = "<group>";
@@ -149,6 +152,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0592EE5E2C54F3840082D8DD /* Secrets.plist in Resources */,
 				053EC1DA2C5461430019C618 /* Assets.xcassets in Resources */,
 				053EC1DD2C5461430019C618 /* Base in Resources */,
 				053EC1D82C5461420019C618 /* Base in Resources */,

@@ -58,13 +58,37 @@
 			children = (
 				053EC1D02C5461420019C618 /* AppDelegate.swift */,
 				053EC1D22C5461420019C618 /* SceneDelegate.swift */,
-				053EC1D42C5461420019C618 /* ViewController.swift */,
-				053EC1D62C5461420019C618 /* Main.storyboard */,
+				0592EE582C54D1040082D8DD /* Model */,
+				0592EE592C54D10D0082D8DD /* View */,
+				0592EE5A2C54D1180082D8DD /* Controller */,
 				053EC1D92C5461430019C618 /* Assets.xcassets */,
-				053EC1DB2C5461430019C618 /* LaunchScreen.storyboard */,
 				053EC1DE2C5461430019C618 /* Info.plist */,
 			);
 			path = GiphyFinder;
+			sourceTree = "<group>";
+		};
+		0592EE582C54D1040082D8DD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0592EE592C54D10D0082D8DD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				053EC1D62C5461420019C618 /* Main.storyboard */,
+				053EC1DB2C5461430019C618 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0592EE5A2C54D1180082D8DD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				053EC1D42C5461420019C618 /* ViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

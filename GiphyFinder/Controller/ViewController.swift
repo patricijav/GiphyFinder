@@ -10,12 +10,19 @@ import SDWebImage
 
 class ViewController: UIViewController, UITextFieldDelegate {
 
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchTextField: UITextField!
 
     var giphyKey: String? = nil
+    var gifs: [String] = []
+    // How many GIFs to load in a single call, max 50 for Beta keys
+    let limit = 50
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        collectionView.dataSource = self
+        collectionView.delegate = self
 
         searchTextField.delegate = self
 
@@ -35,10 +42,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        let textFieldText = textField.text!
-        print(textFieldText)
+        // Clear GIFs on Return pressed
+        gifs = []
 
-        let requestUrl = "https://api.giphy.com/v1/gifs/search?q=gossip+girl&api_key=\(giphyKey!)&limit=1"
+        // Currently need to be careful, as the string is not in the query type
+        let textFieldText = textField.text!
+
+        let requestUrl = "https://api.giphy.com/v1/gifs/search?q=\(textFieldText)&api_key=\(giphyKey!)&limit=\(limit)"
 
         performRequest(urlString: requestUrl)
 
@@ -46,6 +56,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
 
     func performRequest(urlString: String) {
+        print("Request URL: \(urlString)")
         // Create a URL (and check if it doesn't fail)
         if let url = URL(string: urlString) {
             // Create a URLSession with the defaul configuration
@@ -67,26 +78,85 @@ class ViewController: UIViewController, UITextFieldDelegate {
             do {
                 // Casting JSON object as [String: Any], because the top level structure is a dictionary
                 // dataArray is a array of dictionaries
-                // Taking the first element (GIF)
-                // Looking at the images, which is a dictionary of different size versions
-                // Taking the original image version
-                // Taking the URL to the specific version
                 if let json = try JSONSerialization.jsonObject(with: safeData) as? [String: Any],
-                    let dataArray = json["data"] as? [[String: Any]],
-                    let firstGif = dataArray.first,
-                    let images = firstGif["images"] as? [String: Any],
-                    let original = images["original"] as? [String: Any],
-                    let gifURL = original["url"] as? String {
-                    print("GIF URL: \(gifURL)")
-                    let gifURL2 = URL(string: gifURL)
-                    // oneGifImageView.sd_setImage(with: gifURL2, placeholderImage: UIImage(named: "logo.png"))
+                   let dataArray = json["data"] as? [[String: Any]] {
+                    // Taking the first element (GIF)
+                    // Looking at the images, which is a dictionary of different size versions
+                    // Taking the original image version
+                    // Taking the URL to the specific version
+                    for gif in dataArray {
+                        // This part could be cleaned up
+                        let images = gif["images"] as? [String: Any]
+                        let fixedHeightSmall = images!["fixed_height_small"] as? [String: Any]
+                        let gifURL = fixedHeightSmall!["url"] as? String
+                        print("GIF [\(gifs.count)] URL: \(gifURL!)")
+                        gifs.append(gifURL!)
+                    }
                 } else {
-                    print("No GIF URL found")
+                    print("Error parsing JSON!")
                 }
             } catch {
                 // Not the correct structure, for example
                 print("Error parsing JSON: \(error)")
             }
+        }
+
+        // Reload collection view
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
+}
+
+extension ViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return gifs.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+
+        // Create an UIImageView and add it to the cell's content view
+        let imageView = UIImageView(frame: cell.contentView.frame)
+        imageView.sd_setImage(with: URL(string: gifs[indexPath.item]), completed: nil)
+
+        // Ensure the image takes the whole space, but isn't squished, but might be displaced
+        imageView.contentMode = .scaleAspectFill
+
+        // Add the image view to the cell's content view
+        cell.contentView.addSubview(imageView)
+
+        return cell
+    }
+}
+
+extension ViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let columns: CGFloat = 2
+        let collectionViewWidth = collectionView.bounds.width
+        let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
+        let spaceBetweenCells = flowLayout.minimumInteritemSpacing * (columns - 1)
+        let adjustedWidth = collectionViewWidth - spaceBetweenCells
+        let width: CGFloat = adjustedWidth / columns
+        // To make it a square
+        // Additionally: we could also set pixels if we wanted to fit more images, for example, in landscape
+        let height: CGFloat = width
+        return CGSize(width: width, height: height)
+    }
+}
+
+extension ViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+
+        if offsetY > contentHeight - scrollView.frame.size.height {
+            // Currently need to be careful, as the string is not in the query type
+            let textFieldText = self.searchTextField.text!
+
+            let requestUrl = "https://api.giphy.com/v1/gifs/search?q=\(textFieldText)&api_key=\(giphyKey!)&limit=\(limit)&offset=\(self.gifs.count)"
+
+            performRequest(urlString: requestUrl)
         }
     }
 }

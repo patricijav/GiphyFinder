@@ -46,10 +46,10 @@
                                 </cells>
                             </collectionView>
                             <stackView opaque="NO" alpha="0.0" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="CWo-kP-KXs">
-                                <rect key="frame" x="126.00000000000001" y="364" width="141.33333333333337" height="124.33333333333331"/>
+                                <rect key="frame" x="120" y="364" width="153" height="124.33333333333331"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iDK-pa-AAd">
-                                        <rect key="frame" x="40.666666666666657" y="0.0" width="60" height="60"/>
+                                        <rect key="frame" x="46.666666666666657" y="0.0" width="60" height="60"/>
                                         <color key="backgroundColor" red="0.94901960780000005" green="0.74509803919999995" blue="0.81960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="1yB-Xg-PUg"/>
@@ -60,13 +60,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tgV-sC-5iG">
-                                        <rect key="frame" x="49.333333333333343" y="70" width="42.666666666666657" height="24"/>
+                                        <rect key="frame" x="55.333333333333343" y="70" width="42.666666666666657" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" red="0.94901960780000005" green="0.74509803919999995" blue="0.81960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Too many symbols" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QIM-x8-Lch">
-                                        <rect key="frame" x="0.0" y="104" width="141.33333333333334" height="20.333333333333329"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter error text here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QIM-x8-Lch">
+                                        <rect key="frame" x="0.0" y="104" width="153" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.5607843137254902" green="0.5607843137254902" blue="0.5607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -97,6 +97,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="I6b-J3-RM5" id="xxt-94-anG"/>
                         <outlet property="collectionView" destination="aWf-1Q-f9y" id="csw-Py-G7S"/>
+                        <outlet property="errorLabel" destination="QIM-x8-Lch" id="Qxe-gN-pDa"/>
                         <outlet property="errorStackView" destination="CWo-kP-KXs" id="hnx-Te-bXv"/>
                         <outlet property="searchTextField" destination="2DC-LO-zZe" id="ezB-G6-418"/>
                         <segue destination="JD8-1V-kh1" kind="presentation" identifier="goToDetailed" modalPresentationStyle="fullScreen" id="PC4-My-EjU"/>

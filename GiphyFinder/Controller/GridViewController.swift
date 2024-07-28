@@ -5,13 +5,15 @@
 //  Created by Patrīcija Vainovska on 27/07/2024.
 //
 
-import UIKit
+import Network
 import SDWebImage
+import UIKit
 
 class GridViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var errorStackView: UIStackView!
     @IBOutlet weak var searchTextField: UITextField!
 
@@ -20,6 +22,8 @@ class GridViewController: UIViewController, UITextFieldDelegate {
     // How many GIFs to load in a single call, max 50 for Beta keys
     let limit = 50
     var lastScheduledSearch: Timer?
+    let monitor = NWPathMonitor()
+    var hasInternet = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +34,14 @@ class GridViewController: UIViewController, UITextFieldDelegate {
         searchTextField.delegate = self
 
         networkManager.readGiphyKeyFromSecrets()
+
+        monitor.pathUpdateHandler = {
+            self.hasInternet = $0.status == .satisfied
+            print("Device has internet connection: \(self.hasInternet)")
+        }
+
+        let queue = DispatchQueue.global(qos: .background)
+        monitor.start(queue: queue)
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -43,25 +55,35 @@ class GridViewController: UIViewController, UITextFieldDelegate {
         // If there was a waiting request, cancel it
         lastScheduledSearch?.invalidate()
 
+        // Preparation stuff
+        // Clear errors if there were any
+        errorStackView.alpha = 0.0
+        // Clear the current GIFs
         gifs = []
 
-        // Schedule a search after 1 second
-        lastScheduledSearch = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(startSearching), userInfo: sender.text, repeats: false)
+        // Don't send the request if the new value is an empty request
+        if !sender.text!.isEmpty {
+            // Schedule a search after 1 second
+            lastScheduledSearch = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(startSearching), userInfo: sender.text, repeats: false)
+        }
     }
 
     @objc func startSearching(timer: Timer) {
         activityIndicator.startAnimating()
         // User has stopped typing, retrieve the necessary GIFs
 
-        // Preparation stuff
-        // Clear errors if there were any
-        errorStackView.alpha = 0.0
-
         let searchText = timer.userInfo as! String
 
         // Check for errors
         if searchText.count > 50 {
+            errorLabel.text = "Too many symbols"
             errorStackView.alpha = 1.0
+            self.activityIndicator.stopAnimating()
+            return
+        } else if !hasInternet {
+            errorLabel.text = "No internet"
+            errorStackView.alpha = 1.0
+            self.activityIndicator.stopAnimating()
             return
         }
 
@@ -123,6 +145,10 @@ class GridViewController: UIViewController, UITextFieldDelegate {
             self.collectionView.reloadData()
         }
         self.activityIndicator.stopAnimating()
+    }
+
+    deinit {
+        monitor.cancel()
     }
 }
 

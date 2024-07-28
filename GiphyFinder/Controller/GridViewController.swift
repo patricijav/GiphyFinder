@@ -10,6 +10,7 @@ import SDWebImage
 
 class GridViewController: UIViewController, UITextFieldDelegate {
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var errorStackView: UIStackView!
     @IBOutlet weak var searchTextField: UITextField!
@@ -61,6 +62,7 @@ class GridViewController: UIViewController, UITextFieldDelegate {
     }
 
     @objc func startSearching(timer: Timer) {
+        activityIndicator.startAnimating()
         // User has stopped typing, retrieve the necessary GIFs
 
         // Preparation stuff
@@ -132,6 +134,7 @@ class GridViewController: UIViewController, UITextFieldDelegate {
         DispatchQueue.main.async {
             self.collectionView.reloadData()
         }
+        self.activityIndicator.stopAnimating()
     }
 }
 

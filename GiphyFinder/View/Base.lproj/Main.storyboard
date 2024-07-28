@@ -20,6 +20,9 @@
                                 <rect key="frame" x="16" y="75" width="361" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="searchTextFieldChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="xIh-dl-84T"/>
+                                </connections>
                             </textField>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="aWf-1Q-f9y">
                                 <rect key="frame" x="16" y="125" width="361" height="709"/>

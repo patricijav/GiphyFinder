@@ -17,6 +17,7 @@ class GridViewController: UIViewController, UITextFieldDelegate {
     var gifs: [String] = []
     // How many GIFs to load in a single call, max 50 for Beta keys
     let limit = 50
+    var lastScheduledSearch: Timer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,23 +43,37 @@ class GridViewController: UIViewController, UITextFieldDelegate {
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // Clear GIFs on Return pressed
-        gifs = []
-
-        // Currently need to be careful, as the string is not in the query type
-        let textFieldText = textField.text!
-
-        let requestUrl = "https://api.giphy.com/v1/gifs/search?q=\(textFieldText)&api_key=\(giphyKey!)&limit=\(limit)"
-
-        performRequest(urlString: requestUrl)
+        // Close the keyboard when the user presses Return
+        self.view.endEditing(true)
 
         return true
     }
 
+    @IBAction func searchTextFieldChanged(_ sender: UITextField) {
+        // If there was a waiting request, cancel it
+        lastScheduledSearch?.invalidate()
+
+        // Schedule a search after 1 second
+        lastScheduledSearch = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(startSearching), userInfo: sender.text, repeats: false)
+    }
+
+    @objc func startSearching(timer: Timer) {
+        // User has stopped typing, retrieve the necessary GIFs
+
+        let searchText = timer.userInfo as! String
+
+        // Clear GIFs on Return pressed
+        gifs = []
+
+        let requestUrl = "https://api.giphy.com/v1/gifs/search?q=\(searchText)&api_key=\(giphyKey!)&limit=\(limit)"
+
+        performRequest(urlString: requestUrl)
+    }
+
     func performRequest(urlString: String) {
-        print("Request URL: \(urlString)")
         // Create a URL (and check if it doesn't fail)
         if let url = URL(string: urlString) {
+            print("Request URL: \(url)")
             // Create a URLSession with the defaul configuration
             let session = URLSession(configuration: .default)
             // Give the session a task
@@ -87,8 +102,10 @@ class GridViewController: UIViewController, UITextFieldDelegate {
                     for gif in dataArray {
                         // This part could be cleaned up
                         let images = gif["images"] as? [String: Any]
-                        let fixedHeightSmall = images!["fixed_height_small"] as? [String: Any]
-                        let gifURL = fixedHeightSmall!["url"] as? String
+                        // Currently retrieving original, to get some loading time inbetween,
+                        //   but in the final version we can use fixed_width
+                        let original = images!["original"] as? [String: Any]
+                        let gifURL = original!["url"] as? String
                         print("GIF [\(gifs.count)] URL: \(gifURL!)")
                         gifs.append(gifURL!)
                     }

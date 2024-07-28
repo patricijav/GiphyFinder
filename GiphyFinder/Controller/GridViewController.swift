@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class GridViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchTextField: UITextField!
@@ -51,6 +51,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let requestUrl = "https://api.giphy.com/v1/gifs/search?q=\(textFieldText)&api_key=\(giphyKey!)&limit=\(limit)"
 
         performRequest(urlString: requestUrl)
+
+        // self.performSegue(withIdentifier: "goToDetailed", sender: self)
 
         return true
     }
@@ -108,7 +110,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
 }
 
-extension ViewController: UICollectionViewDataSource {
+extension GridViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return gifs.count
     }
@@ -130,7 +132,7 @@ extension ViewController: UICollectionViewDataSource {
     }
 }
 
-extension ViewController: UICollectionViewDelegateFlowLayout {
+extension GridViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let columns: CGFloat = 2
         let collectionViewWidth = collectionView.bounds.width
@@ -145,7 +147,7 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension ViewController: UIScrollViewDelegate {
+extension GridViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height

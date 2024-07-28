@@ -24,6 +24,7 @@ class GridViewController: UIViewController, UITextFieldDelegate {
     var lastScheduledSearch: Timer?
     let monitor = NWPathMonitor()
     var hasInternet = false
+    var isFetching = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +61,7 @@ class GridViewController: UIViewController, UITextFieldDelegate {
         errorStackView.alpha = 0.0
         // Clear the current GIFs
         gifs = []
+        self.collectionView.reloadData()
 
         // Don't send the request if the new value is an empty request
         if !sender.text!.isEmpty {
@@ -93,6 +95,12 @@ class GridViewController: UIViewController, UITextFieldDelegate {
     }
 
     func performRequest(urlString: String) {
+        // So infinite scrolling doesn't get triggered too much (maybe we can move this)
+        if isFetching {
+            return
+        }
+        isFetching = true
+
         // Create a URL (and check if it doesn't fail)
         if let url = URL(string: urlString) {
             print("Request URL: \(url)")
@@ -143,8 +151,10 @@ class GridViewController: UIViewController, UITextFieldDelegate {
         // Reload collection view
         DispatchQueue.main.async {
             self.collectionView.reloadData()
+            self.activityIndicator.stopAnimating()
         }
-        self.activityIndicator.stopAnimating()
+
+        isFetching = false
     }
 
     deinit {
@@ -159,6 +169,9 @@ extension GridViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+
+        // To not have any duplicates when searching a new keyword
+        cell.contentView.subviews.forEach { $0.removeFromSuperview() }
 
         // Create an UIImageView and add it to the cell's content view
         let imageView = UIImageView(frame: cell.contentView.frame)

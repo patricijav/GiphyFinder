@@ -18,6 +18,7 @@
 		0592EE632C5555100082D8DD /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0592EE622C5555100082D8DD /* SDWebImageMapKit */; };
 		05AA32A02C565DD30001C292 /* DetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AA329F2C565DD30001C292 /* DetailedViewController.swift */; };
 		05AA32A82C56AED10001C292 /* GiphyFinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AA32A72C56AED10001C292 /* GiphyFinderTests.swift */; };
+		05AA32AF2C56BDB50001C292 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AA32AE2C56BDB50001C292 /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		05AA329F2C565DD30001C292 /* DetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedViewController.swift; sourceTree = "<group>"; };
 		05AA32A52C56AED10001C292 /* GiphyFinderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GiphyFinderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		05AA32A72C56AED10001C292 /* GiphyFinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyFinderTests.swift; sourceTree = "<group>"; };
+		05AA32AE2C56BDB50001C292 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 		0592EE582C54D1040082D8DD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				05AA32AE2C56BDB50001C292 /* NetworkManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 			files = (
 				053EC1D52C5461420019C618 /* GridViewController.swift in Sources */,
 				053EC1D12C5461420019C618 /* AppDelegate.swift in Sources */,
+				05AA32AF2C56BDB50001C292 /* NetworkManager.swift in Sources */,
 				05AA32A02C565DD30001C292 /* DetailedViewController.swift in Sources */,
 				053EC1D32C5461420019C618 /* SceneDelegate.swift in Sources */,
 			);

@@ -15,7 +15,7 @@ class GridViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var errorStackView: UIStackView!
     @IBOutlet weak var searchTextField: UITextField!
 
-    var giphyKey: String? = nil
+    var networkManager = NetworkManager()
     var gifs: [String] = []
     // How many GIFs to load in a single call, max 50 for Beta keys
     let limit = 50
@@ -29,19 +29,7 @@ class GridViewController: UIViewController, UITextFieldDelegate {
 
         searchTextField.delegate = self
 
-        // Loading the Giphy API key into the giphyKey variable
-        //   Get the full path of the file
-        //   Get the data object
-        //   Read it as a property list
-        //   Transform it into a dictionary with string keys
-        //   Get the API key
-        if let path = Bundle.main.path(forResource: "Secrets", ofType: "plist"),
-           let xml = FileManager.default.contents(atPath: path),
-           let plist = try? PropertyListSerialization.propertyList(from: xml, options: [], format: nil),
-           let dict = plist as? [String: Any],
-           let apiKey = dict["GiphyAPIKey"] as? String {
-            giphyKey = apiKey
-        }
+        networkManager.readGiphyKeyFromSecrets()
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -77,9 +65,9 @@ class GridViewController: UIViewController, UITextFieldDelegate {
             return
         }
 
-        let requestUrl = "https://api.giphy.com/v1/gifs/search?q=\(searchText)&api_key=\(giphyKey!)&limit=\(limit)"
+        let requestUrl = networkManager.getRequestUrl(query: searchText, limit: limit)
 
-        performRequest(urlString: requestUrl)
+        performRequest(urlString: requestUrl!)
     }
 
     func performRequest(urlString: String) {
@@ -195,9 +183,9 @@ extension GridViewController: UIScrollViewDelegate {
             // Currently need to be careful, as the string is not in the query type
             let textFieldText = self.searchTextField.text!
 
-            let requestUrl = "https://api.giphy.com/v1/gifs/search?q=\(textFieldText)&api_key=\(giphyKey!)&limit=\(limit)&offset=\(self.gifs.count)"
+            let requestUrl = networkManager.getRequestUrl(query: textFieldText, limit: limit, offset: self.gifs.count)
 
-            performRequest(urlString: requestUrl)
+            performRequest(urlString: requestUrl!)
         }
     }
 }

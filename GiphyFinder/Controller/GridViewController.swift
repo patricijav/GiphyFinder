@@ -11,6 +11,7 @@ import SDWebImage
 class GridViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var errorStackView: UIStackView!
     @IBOutlet weak var searchTextField: UITextField!
 
     var giphyKey: String? = nil
@@ -53,6 +54,8 @@ class GridViewController: UIViewController, UITextFieldDelegate {
         // If there was a waiting request, cancel it
         lastScheduledSearch?.invalidate()
 
+        gifs = []
+
         // Schedule a search after 1 second
         lastScheduledSearch = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(startSearching), userInfo: sender.text, repeats: false)
     }
@@ -60,10 +63,17 @@ class GridViewController: UIViewController, UITextFieldDelegate {
     @objc func startSearching(timer: Timer) {
         // User has stopped typing, retrieve the necessary GIFs
 
+        // Preparation stuff
+        // Clear errors if there were any
+        errorStackView.alpha = 0.0
+
         let searchText = timer.userInfo as! String
 
-        // Clear GIFs on Return pressed
-        gifs = []
+        // Check for errors
+        if searchText.count > 50 {
+            errorStackView.alpha = 1.0
+            return
+        }
 
         let requestUrl = "https://api.giphy.com/v1/gifs/search?q=\(searchText)&api_key=\(giphyKey!)&limit=\(limit)"
 

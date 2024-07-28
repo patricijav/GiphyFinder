@@ -57,7 +57,7 @@
                     <connections>
                         <outlet property="collectionView" destination="aWf-1Q-f9y" id="csw-Py-G7S"/>
                         <outlet property="searchTextField" destination="2DC-LO-zZe" id="ezB-G6-418"/>
-                        <segue destination="JD8-1V-kh1" kind="presentation" identifier="goToDetailed" id="PC4-My-EjU"/>
+                        <segue destination="JD8-1V-kh1" kind="presentation" identifier="goToDetailed" modalPresentationStyle="fullScreen" id="PC4-My-EjU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -69,7 +69,7 @@
             <objects>
                 <viewController id="JD8-1V-kh1" customClass="DetailedViewController" customModule="GiphyFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ljc-Rz-Y7Z">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cjc-Sz-xN2">
@@ -93,6 +93,9 @@
                         <color key="backgroundColor" red="0.97647058823529409" green="0.96078431372549022" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="zdH-Iq-4jt"/>
+                    <connections>
+                        <outlet property="detailedGifImageView" destination="Va2-cO-Bfp" id="gYJ-Pc-xAX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="esy-f7-y5o" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

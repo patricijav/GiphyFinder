@@ -52,8 +52,6 @@ class GridViewController: UIViewController, UITextFieldDelegate {
 
         performRequest(urlString: requestUrl)
 
-        // self.performSegue(withIdentifier: "goToDetailed", sender: self)
-
         return true
     }
 
@@ -129,6 +127,17 @@ extension GridViewController: UICollectionViewDataSource {
         cell.contentView.addSubview(imageView)
 
         return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "goToDetailed", sender: indexPath)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToDetailed" {
+            let destinationVC = segue.destination as! DetailedViewController
+            destinationVC.gifUrl = gifs[(sender as! IndexPath).item]
+        }
     }
 }
 

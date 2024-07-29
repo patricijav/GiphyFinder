@@ -1,7 +1,7 @@
 # GiphyFinder
 
 ### The app in action
-TODO: GIF or screenshot(s).
+<img src="https://github.com/user-attachments/assets/a855dca1-782f-4208-8c46-c33020b9f694" height="400"/>
 
 ### Getting started
 
@@ -15,8 +15,7 @@ account and create an API key for iOS.
 ### Figma
 Before creating the app I planned it out in Figma. To view it [see this link](https://www.figma.com/design/6qbZBGtM3tsyMn0tQPS7VJ/GiphyFinder-by-Patricia)
 or just take a look at the screenshot below.
-
-TODO: Screenshot.
+![figma](https://github.com/user-attachments/assets/ed4a680f-10ee-4fc0-95dd-9ad57d5b8fe4)
 
 ### Solution details
 Solution was built and ran on Xcode version 15.4, macOS version 14.5, Swift 5.10.

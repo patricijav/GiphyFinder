@@ -36,10 +36,7 @@ class GridViewController: UIViewController, UITextFieldDelegate {
 
         networkManager.readGiphyKeyFromSecrets()
 
-        monitor.pathUpdateHandler = {
-            self.hasInternet = $0.status == .satisfied
-            print("Device has internet connection: \(self.hasInternet)")
-        }
+        monitor.pathUpdateHandler = {self.hasInternet = $0.status == .satisfied}
 
         let queue = DispatchQueue.global(qos: .background)
         monitor.start(queue: queue)
@@ -143,7 +140,6 @@ class GridViewController: UIViewController, UITextFieldDelegate {
                         //   but in the final version we can use fixed_width
                         let original = images!["original"] as? [String: Any]
                         let gifURL = original!["url"] as? String
-                        print("GIF [\(gifs.count)] URL: \(gifURL!)")
                         gifs.append(gifURL!)
                     }
                 } else {

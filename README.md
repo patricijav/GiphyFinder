@@ -24,7 +24,11 @@ Used SDWebImage as a package dependency to display individual GIFs. Other librar
 example, JellyGIF, might be faster, but SDWebImage is popular and stable.
 
 The code handles multiple errors, but displays on the screen the following errors: too
-many symbols in the search field, no internet connection.
+many symbols in the search field, no internet connection. Additionally we could handle
+and display more errors, for example, Giphy is down (>= 500 status code), API request
+limit reached (max 100 calls per hour, status code 429), Giphy API key isn't set or
+too many GIFs loaded (Giphy API max offset is 4999 and max limit is 50, that would make
+the maximum 5049 or 5000 if we round down).
 
 High quality GIFs are displayed also in the grid view, this was done to increase the
 loading time, to see better how the loading indicator works. In the final version lower

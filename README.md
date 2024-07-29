@@ -40,13 +40,15 @@ Code uses the MVC (Model-View-Controller) architecture pattern.
 4. [[Link]](https://www.canva.com/) **Canva**: to create an icon/logo for the app;
 5. [[Link]](https://figma.com/) **Figma**: to create the initial app design;
 6. [[Link]](https://www.appicon.co/) **App Icon**: to get the 1x, 2x and 3x versions of the logo;
-7. [[Link]](https://chatgpt.com/) **ChatGPT**: to have useful conversations with an artificial iOS App Developer.
-8. [[Link]](https://developers.giphy.com/) **GIPHY Developers**: to get API key and familiarize myself with the API;
-9. [[Link]](https://vikramios.medium.com/disabling-dark-mode-in-ios-da0205344a1a) **Medium "Disabling Dark Mode in iOS Apps with Swift"**: to disable dark mode for the app;
-10. [[Link]](https://iremkaraoglu.medium.com/get-started-with-uicollectionview-3e744b78ed7f) **Medium "Get started with UICollectionView 🍏"**: to understand UICollectionView;
-11. [[Link]](https://developer.apple.com/forums/thread/16233) **Apple Developer "Find only stop to type"**: to implement auto-search;
-12. [[Link]](https://stackoverflow.com/questions/7010547/uitextfield-text-change-event) **Stack Overflow "UITextField text change event"**: to implement auto-search;
-13. [[Link]](https://stackoverflow.com/questions/24180954/how-to-hide-keyboard-in-swift-on-pressing-return-key) **Stack Overflow "How to hide keyboard in swift on pressing return key?"**: to close keyboard when pressing return;
-14. [[Link]](https://www.youtube.com/watch?v=opkU2UuPk0A) **YouTube "Intro to Unit Testing in Swift"**: to implement unit tests.
-15. [[Link]](https://www.hackingwithswift.com/example-code/networking/how-to-check-for-internet-connectivity-using-nwpathmonitor) **Hacking With Swift "How to check for internet connectivity using NWPathMonitor"**: to implement network availability handling.
-16. [[Link]](https://stackoverflow.com/questions/38894031/swift-how-to-detect-orientation-changes) **Stack Overflow "Swift - How to detect orientation changes"**: to detect orientation change.
+7. [[Link]](https://www.swift.org/documentation/) **Swift Documentation**: to understand Swift better;
+8. [[Link]](https://developer.apple.com/documentation) **Apple Developer Documentation**: to understand UI components better;
+9. [[Link]](https://chatgpt.com/) **ChatGPT**: to have useful conversations with an artificial iOS App Developer.
+10. [[Link]](https://developers.giphy.com/) **GIPHY Developers**: to get API key and familiarize myself with the API;
+11. [[Link]](https://vikramios.medium.com/disabling-dark-mode-in-ios-da0205344a1a) **Medium "Disabling Dark Mode in iOS Apps with Swift"**: to disable dark mode for the app;
+12. [[Link]](https://iremkaraoglu.medium.com/get-started-with-uicollectionview-3e744b78ed7f) **Medium "Get started with UICollectionView 🍏"**: to understand UICollectionView;
+13. [[Link]](https://developer.apple.com/forums/thread/16233) **Apple Developer "Find only stop to type"**: to implement auto-search;
+14. [[Link]](https://stackoverflow.com/questions/7010547/uitextfield-text-change-event) **Stack Overflow "UITextField text change event"**: to implement auto-search;
+15. [[Link]](https://stackoverflow.com/questions/24180954/how-to-hide-keyboard-in-swift-on-pressing-return-key) **Stack Overflow "How to hide keyboard in swift on pressing return key?"**: to close keyboard when pressing return;
+16. [[Link]](https://www.youtube.com/watch?v=opkU2UuPk0A) **YouTube "Intro to Unit Testing in Swift"**: to implement unit tests.
+17. [[Link]](https://www.hackingwithswift.com/example-code/networking/how-to-check-for-internet-connectivity-using-nwpathmonitor) **Hacking With Swift "How to check for internet connectivity using NWPathMonitor"**: to implement network availability handling.
+18. [[Link]](https://stackoverflow.com/questions/38894031/swift-how-to-detect-orientation-changes) **Stack Overflow "Swift - How to detect orientation changes"**: to detect orientation change.

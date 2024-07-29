@@ -158,10 +158,11 @@ class GridViewController: UIViewController, UITextFieldDelegate {
         // Reload collection view
         DispatchQueue.main.async {
             self.collectionView.reloadData()
-            self.activityIndicator.stopAnimating()
         }
 
         isFetching = false
+
+        self.activityIndicator.stopAnimating()
     }
 
     deinit {
@@ -242,6 +243,8 @@ extension GridViewController: UIScrollViewDelegate {
             let textFieldText = self.searchTextField.text!
 
             let requestUrl = networkManager.getRequestUrl(query: textFieldText, limit: limit, offset: self.gifs.count)
+
+            activityIndicator.startAnimating()
 
             performRequest(urlString: requestUrl!)
         }

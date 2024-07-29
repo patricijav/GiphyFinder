@@ -43,6 +43,13 @@ class GridViewController: UIViewController, UITextFieldDelegate {
 
         let queue = DispatchQueue.global(qos: .background)
         monitor.start(queue: queue)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(deviceWasRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
+    }
+
+    @objc func deviceWasRotated() {
+        // We need to refresh the collection view to have 2 columns
+        self.collectionView.reloadData()
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -159,6 +166,7 @@ class GridViewController: UIViewController, UITextFieldDelegate {
 
     deinit {
         monitor.cancel()
+        NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
     }
 }
 
@@ -175,13 +183,24 @@ extension GridViewController: UICollectionViewDataSource {
 
         // Create an UIImageView and add it to the cell's content view
         let imageView = UIImageView(frame: cell.contentView.frame)
+
         imageView.sd_setImage(with: URL(string: gifs[indexPath.item]), completed: nil)
 
         // Ensure the image takes the whole space, but isn't squished, but might be displaced
         imageView.contentMode = .scaleAspectFill
 
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.clipsToBounds = true
+
         // Add the image view to the cell's content view
         cell.contentView.addSubview(imageView)
+
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: cell.contentView.topAnchor),
+            imageView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor),
+            imageView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor)
+        ])
 
         return cell
     }
